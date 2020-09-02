@@ -1,0 +1,16 @@
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/parser/config/secrets/prod/prod.decrypt.private.php
+/parser/public/bundles/
+/parser/var/
+/parser/vendor/
+/docker/mysql/database/
+/.idea/
+/parser/.env
+/parser/var
+/parser/vendor
+/parser/.php_cs.cache
+/parser/public/images/

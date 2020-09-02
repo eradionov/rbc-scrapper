@@ -1,0 +1,25 @@
+{% extends "/base.html.twig" %}
+
+{% block title %}News{% endblock %}
+
+{% block body %}
+    <div class="container">
+            {% for article in news %}
+                <div class="pt-1 pb-5">
+                    <h1 class="h1">{{ article.title }}</h1>
+                    {% if article.summary %}
+                        <div>{{ article.summary }}</div>
+                    {% endif %}
+                    <div class="clearfix">
+                        <a class="btn btn-primary float-right" href="{{ path('article_details', {slug: article.externalId}) }}">
+                            Подробнее
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        <div>
+            <span>Общее количество новостей: <strong>{{ news.getTotalItemCount }}</strong></span>
+            {{ knp_pagination_render(news) }}
+        </div>
+    </div>
+{% endblock %}

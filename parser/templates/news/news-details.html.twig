@@ -1,0 +1,24 @@
+{% extends "/base.html.twig" %}
+
+{% block title %}{{ article.title }}{% endblock %}
+{% block body %}
+    <div class="container">
+        <h1 class="h1">{{ article.title }}</h1>
+
+        {% if article.summary %}
+            <div class="pt-2 pb-2">
+                <strong>{{ article.summary }}</strong>
+            </div>
+        {% endif %}
+
+        {% if article.image %}
+            <div class="image pt-1 pb-1">
+                <img src="{{ absolute_url(asset('images/'~article.image~'')) }}" class="img-fluid"/>
+            </div>
+        {% endif %}
+
+        <div class="row pt-3">
+            {{ article.content|raw }}
+        </div>
+    </div>
+{% endblock %}

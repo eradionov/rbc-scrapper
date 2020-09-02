@@ -1,0 +1,35 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h5 {
+    width: 100%;
+}
+
+ul, ol {
+    width: 100%;
+}
+
+p {
+    width: 100%;
+}
+
+.pagination .page > a {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.pagination .next,
+.pagination .previous {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.pagination .last {
+    padding-left: 15px;
+}
+
+pagination .first {
+    padding-right: 15px;
+}
