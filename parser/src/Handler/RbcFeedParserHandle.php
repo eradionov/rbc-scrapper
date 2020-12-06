@@ -36,9 +36,9 @@ class RbcFeedParserHandle extends AbstractParserHandle
                     $this->parseImage($crawler)
                 );
 
-                $errors = $this->validator->validate($article);
+                $errors = (array) $this->validator->validate($article);
 
-                if (count($errors) > 0) {
+                if (!empty($errors)) {
                     throw new ParserException(implode(PHP_EOL, $errors));
                 }
 
@@ -144,7 +144,7 @@ class RbcFeedParserHandle extends AbstractParserHandle
     /**
      * Parses feed news json array for news links.
      *
-     * @return array
+     * @return array<int, array<string, string>>
      */
     private function requestFeedLinks(): array
     {

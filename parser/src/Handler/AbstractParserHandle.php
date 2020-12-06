@@ -6,8 +6,9 @@ namespace App\Handler;
 
 use Psr\Log\LoggerInterface;
 use App\Handler\Interfaces\ParserHandleInterface;
-use App\Parser\Interfaces\ContentParserInterface;
+use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 abstract class AbstractParserHandle implements ParserHandleInterface
 {
@@ -15,39 +16,18 @@ abstract class AbstractParserHandle implements ParserHandleInterface
 
     protected const ALLOWED_TAGS = ['p', 'a', 'ul', 'li', 'strong', 'b', 'span', 'h1', 'h2', 'h3', 'ol'];
 
-    protected string $imageUploadFolder;
-
     /**
-     * @var ContentParserInterface
-     */
-    protected ContentParserInterface $parserClient;
-
-    /**
-     * @var LoggerInterface
-     */
-    protected LoggerInterface $logger;
-
-    /**
-     * @var ValidatorInterface
-     */
-    protected ValidatorInterface $validator;
-
-    /**
-     * @param ContentParserInterface $parserClient
+     * @param AbstractBrowser $parserClient
      * @param LoggerInterface        $logger
      * @param ValidatorInterface     $validator
      * @param string                 $imageUploadFolder
      */
     public function __construct(
-        ContentParserInterface $parserClient,
-        LoggerInterface $logger,
-        ValidatorInterface $validator,
-        string $imageUploadFolder
+        protected AbstractBrowser $parserClient,
+        protected LoggerInterface $logger,
+        protected ValidatorInterface $validator,
+        protected string $imageUploadFolder
     ) {
-        $this->imageUploadFolder = $imageUploadFolder;
-        $this->parserClient = $parserClient;
-        $this->logger = $logger;
-        $this->validator = $validator;
     }
 
     /**

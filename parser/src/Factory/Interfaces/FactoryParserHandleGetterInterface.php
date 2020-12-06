@@ -21,7 +21,7 @@ interface FactoryParserHandleGetterInterface
     /**
      * Returns all available parser handles.
      *
-     * @return array
+     * @return array<AbstractParserHandle>
      */
     public function getAll(): array;
 }

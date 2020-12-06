@@ -95,8 +95,7 @@ class Newsfeeds
     /**
      * @param string $externalId
      *
-     * @throws \InvalidArgumentException
-     *                                   If value is blank, or null
+     * @throws \InvalidArgumentException If value is blank, or null
      */
     private function setExternalId(string $externalId): void
     {
@@ -110,8 +109,7 @@ class Newsfeeds
     /**
      * @param string $title
      *
-     * @throws \InvalidArgumentException
-     *                                   If value is blank, or null
+     * @throws \InvalidArgumentException If value is blank, or null
      */
     private function setTitle(string $title): void
     {
@@ -125,8 +123,7 @@ class Newsfeeds
     /**
      * @param string $content
      *
-     * @throws \InvalidArgumentException
-     *                                   If value is blank, or null
+     * @throws \InvalidArgumentException If value is blank, or null
      */
     private function setContent(string $content): void
     {

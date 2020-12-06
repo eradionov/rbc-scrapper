@@ -23,9 +23,9 @@ class NewsRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param array $externalKeys
+     * @param array<string> $externalKeys
      *
-     * @return array
+     * @return array<string>
      */
     public function findExistingExternalIdsByExternalKeys(array $externalKeys): array
     {

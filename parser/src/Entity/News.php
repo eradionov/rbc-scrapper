@@ -120,9 +120,9 @@ class News
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getExternalId(): ?string
+    public function getExternalId(): string
     {
         return $this->externalId;
     }

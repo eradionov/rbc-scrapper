@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Entity\News;
+use App\Repository\NewsRepository;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -24,12 +25,14 @@ class ParseFeedsCommand extends Command
      * @param FactoryParserHandleGetterInterface $parserHandleFactory Contains news feed parsers, that would be invoked one by one.
      * @param EntityManagerInterface             $entityManager       Entity manager.
      * @param LoggerInterface                    $logger              Logger for logging activities.
+     * @param NewsRepository                     $newsRepository      News repository
      * @param string|null                        $name                The name of the command; passing null means it must be set in configure().
      */
     public function __construct(
-        FactoryParserHandleGetterInterface $parserHandleFactory,
-        EntityManagerInterface $entityManager,
-        LoggerInterface $logger,
+        private FactoryParserHandleGetterInterface $parserHandleFactory,
+        private EntityManagerInterface $entityManager,
+        private LoggerInterface $logger,
+        private NewsRepository $newsRepository,
         ?string $name = null
     ) {
         parent::__construct($name);
@@ -52,7 +55,6 @@ class ParseFeedsCommand extends Command
         $output->writeln(['Parsing news feeds']);
 
         $handles = $this->parserHandleFactory->getAll();
-        $newsRepository = $this->entityManager->getRepository(News::class);
 
         foreach ($handles as $handle) {
             try {
@@ -62,7 +64,7 @@ class ParseFeedsCommand extends Command
 
                 while ($news = array_splice($parsedNews, 0, self::BATCH_SIZE)) {
                     try {
-                        $duplicates = $newsRepository->findExistingExternalIdsByExternalKeys(array_keys($news));
+                        $duplicates = $this->newsRepository->findExistingExternalIdsByExternalKeys(array_keys($news));
 
                         if (count($duplicates) > 0) {
                             $output->writeln(
@@ -91,10 +93,8 @@ class ParseFeedsCommand extends Command
     }
 
     /**
-     * @param array       $articles
-     *                                 Article news for persisting into database.
-     * @param ProgressBar $progressBar
-     *                                 Console progress bar.
+     * @param array<News> $articles Article news for persisting into database.
+     * @param ProgressBar $progressBar Console progress bar.
      */
     private function writeToDatabase(array $articles, ProgressBar $progressBar): void
     {

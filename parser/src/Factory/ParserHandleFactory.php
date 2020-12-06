@@ -8,13 +8,12 @@ use App\Handler\AbstractParserHandle;
 use App\Factory\Interfaces\FactoryHandleInterface;
 
 /**
- * Chain of responsibility, that is used to aggregate of parser handles
- * and invoke later.
+ * Used to aggregate of parser handlers for later invocation.
  */
 class ParserHandleFactory implements FactoryHandleInterface
 {
     /**
-     * @var array
+     * @var array<AbstractParserHandle>
      */
     private array $parserHandleItems = [];
 
@@ -29,15 +28,15 @@ class ParserHandleFactory implements FactoryHandleInterface
     }
 
     /**
-     * @param AbstractParserHandle $parserHandle
+     * @param AbstractParserHandle $parserHandler
      */
-    public function addParserHandle(AbstractParserHandle $parserHandle): void
+    public function addParserHandle(AbstractParserHandle $parserHandler): void
     {
-        $this->parserHandleItems[$parserHandle->getHandleType()] = $parserHandle;
+        $this->parserHandleItems[$parserHandler->getHandleType()] = $parserHandler;
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getAll(): array
     {
