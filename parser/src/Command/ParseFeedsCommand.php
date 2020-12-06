@@ -21,21 +21,6 @@ class ParseFeedsCommand extends Command
     private const BATCH_SIZE = 15;
 
     /**
-     * @var FactoryParserHandleGetterInterface
-     */
-    private FactoryParserHandleGetterInterface $parserHandleFactory;
-
-    /**
-     * @var EntityManagerInterface
-     */
-    private EntityManagerInterface $entityManager;
-
-    /**
-     * @var LoggerInterface
-     */
-    private LoggerInterface $logger;
-
-    /**
      * @param FactoryParserHandleGetterInterface $parserHandleFactory Contains news feed parsers, that would be invoked one by one.
      * @param EntityManagerInterface             $entityManager       Entity manager.
      * @param LoggerInterface                    $logger              Logger for logging activities.
@@ -45,13 +30,9 @@ class ParseFeedsCommand extends Command
         FactoryParserHandleGetterInterface $parserHandleFactory,
         EntityManagerInterface $entityManager,
         LoggerInterface $logger,
-        string $name = null
+        ?string $name = null
     ) {
         parent::__construct($name);
-
-        $this->parserHandleFactory = $parserHandleFactory;
-        $this->entityManager = $entityManager;
-        $this->logger = $logger;
     }
 
     /**

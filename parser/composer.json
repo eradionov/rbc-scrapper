@@ -24,6 +24,9 @@
         "twig/twig": "^2.0"
     },
     "require-dev": {
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^0.12.58",
+        "phpstan/phpstan-symfony": "^0.12.11",
         "symfony/maker-bundle": "^1.21",
         "symfony/phpunit-bridge": "^5.1"
     },
